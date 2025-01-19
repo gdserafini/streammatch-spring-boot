@@ -3,9 +3,10 @@ package br.alura.streammatch;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import br.alura.streammatch.model.SerieData;
-import br.alura.streammatch.service.APIConsumer;
-import br.alura.streammatch.service.DataConverter;
+import br.alura.streammatch.model.Episode;
+import br.alura.streammatch.model.Season;
+import br.alura.streammatch.model.Serie;
+import br.alura.streammatch.service.DataProcessor;
 
 @SpringBootApplication
 public class StreammatchApplication implements CommandLineRunner {
@@ -16,14 +17,21 @@ public class StreammatchApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
-		var consumer = new APIConsumer();
-		var converter = new DataConverter();
 		try{
-			var json = consumer.getData(
-				"https://www.omdbapi.com/?t=gilmore+girls&apikey=6585022c"
-			);
-			var data = converter.mapData(json, SerieData.class);
-			System.out.println(data);
+			var processor = new DataProcessor();
+
+			var serieUrl = "https://www.omdbapi.com/?t=gilmore+girls&apikey=6585022c";
+			var serieResult = processor.process(serieUrl, Serie.class);
+			System.out.println(serieResult);
+
+			var episodeUrl = "https://www.omdbapi.com/?t=gilmore+girls&season=1&episode=1&apikey=6585022c";
+			var episodeResult = processor.process(episodeUrl, Episode.class);
+			System.out.println(episodeResult);
+
+			var seasonUrl = "https://www.omdbapi.com/?t=gilmore+girls&season=1&apikey=6585022c";
+			var seasonResult = processor.process(seasonUrl, Season.class);
+			System.out.println("Season: " + seasonResult.season());
+			seasonResult.episodes().forEach(System.out::println);
 		}
 		catch(Exception e){
 			e.printStackTrace();
