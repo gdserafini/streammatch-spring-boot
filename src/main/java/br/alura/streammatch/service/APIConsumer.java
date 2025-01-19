@@ -11,8 +11,9 @@ public class APIConsumer {
     public String getData(String url) 
             throws IOException, InterruptedException{
         
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
+        var client = HttpClient.newHttpClient();
+        var request = HttpRequest
+            .newBuilder()
             .uri(URI.create(url))
             .build();
         

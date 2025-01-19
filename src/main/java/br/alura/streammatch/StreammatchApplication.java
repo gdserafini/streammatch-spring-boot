@@ -3,7 +3,6 @@ package br.alura.streammatch;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import br.alura.streammatch.model.SerieData;
 import br.alura.streammatch.service.APIConsumer;
 import br.alura.streammatch.service.DataConverter;
