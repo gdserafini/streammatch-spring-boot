@@ -18,6 +18,7 @@ public class StreammatchApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) {
 		try{
+			System.out.println("Bem vindo ao StreamMatch!");
 			menu.run();
 		}
 		catch(Exception e){
